@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="quote-box">
+        <h2>Quote of the day</h2>
+        <blockquote id="quote">I learned that courage was not the absence of fear, but the triumph over it. The brave man is not he who does not feel afraid, but he who conquers that fear.</blockquote>
+        <span id="author">Nelson Mandela</span>
+        <div>
+            <button onclick="getquote(api_url)">New Quote</button>
+            <button onclick="tweet()"><img src="twitter.png">Tweet</button>
+        </div>
+    </div>
+<script>
+    const quote = document.getElementById("quote")
+    const author = document.getElementById("author")
+    const api_url = "https://zenquotes.io/api/random";
+
+    async function getquote(url){
+        const response = await fetch(url);
+        var data = await response.json();
+        quote.innerHTML = data.q;
+        author.innerHTML = data.a;
+        
+     }
+    getquote(api_url);
+
+    function tweet(){
+        window.open("https://twitter.com/intent/tweet?text=" + quote.innerHTML + " ---by " + author.innerHTML , "Tweet Window" , "width = 600 , height=300");
+    }
+
+</script>  
+</body>
+</html>
